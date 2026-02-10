@@ -1,7 +1,18 @@
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: system-ui, Helvetica, sans-serif;
 }
 #container {
   width: 512px;
   margin: 0 auto;
+  font-size: 14px;
+}
+#menu a {
+  text-decoration: underline;
+  color: black;
+}
+#menu {
+  color: gray;
+}
+#menu span, a, #buttons button {
+  margin: 0 2px;
 }
