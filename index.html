@@ -84,7 +84,10 @@
           context.lineTo(d[0], d[1]);
           context.lineTo(a[0], a[1]);
           context.fillStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+          context.strokeStyle = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+          context.lineWidth = 1;
           context.fill();
+          context.stroke();
         }
 
       }
