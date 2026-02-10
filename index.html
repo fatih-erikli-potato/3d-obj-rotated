@@ -135,18 +135,38 @@
       function tickRotate() {
         meshData = meshRotated[currentFrame];
         drawMesh();
-        if (currentFrame < downloadEnds) {
-          currentFrame += 1;
-          requestAnimationFrame(tickRotate)
+        if (pause) {
         } else {
-          playButton.removeAttribute("disabled");
+          if (currentFrame < downloadEnds) {
+            currentFrame += 1;
+            requestAnimationFrame(tickRotate)
+          } else {
+            playButton.removeAttribute("disabled");
+            playButton.removeChild(playButton.firstChild);
+            playButton.appendChild(document.createTextNode("play"));
+            pause = undefined;
+          }
         }
       }
+      let pause;
       playButton.addEventListener("click", (event) => {
-        currentFrame = 0;
-        event.preventDefault();
-        playButton.setAttribute("disabled", "disabled");
-        tickRotate();
+        if (typeof pause == "undefined") {
+          event.preventDefault();
+          currentFrame = 0;
+          playButton.removeChild(playButton.firstChild);
+          playButton.appendChild(document.createTextNode("pause"))
+          tickRotate();
+          pause = false;
+        } else if (pause) {
+          pause = false;
+          tickRotate();
+          playButton.removeChild(playButton.firstChild);
+          playButton.appendChild(document.createTextNode("pause"))
+        } else {
+          pause = true;
+          playButton.removeChild(playButton.firstChild);
+          playButton.appendChild(document.createTextNode("continue"))
+        }
       });
       downloadButton.addEventListener("click", (event) => {
         event.preventDefault();
